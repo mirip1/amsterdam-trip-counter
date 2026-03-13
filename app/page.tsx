@@ -7,7 +7,7 @@ export default async function Home() {
     return (
         <main className="app-container">
             <header className="app-header">
-                <div className="header-icon">🌷</div>
+                <div className="header-icon">😈​</div>
                 <h1>Viaje a Amsterdam</h1>
                 <p className="header-sub">Seleccionate para apuntar el vicio</p>
                 <Link href="/stats" className="stats-link" style={{ marginTop: '12px', padding: '8px 16px', background: 'var(--surface2)', borderRadius: 'var(--radius-sm)', color: 'var(--text)', textDecoration: 'none', fontSize: '14px', fontWeight: 600, border: '1px solid var(--border)', display: 'inline-block' }}>
