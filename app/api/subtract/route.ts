@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma"
+import { revalidatePath } from "next/cache"
 
 export async function POST(req: Request) {
     const { personId, itemId } = await req.json()
@@ -20,6 +21,8 @@ export async function POST(req: Request) {
             }
         })
     }
+
+    revalidatePath('/', 'layout')
 
     return Response.json({ ok: true })
 }
