@@ -2,8 +2,7 @@ import { PrismaClient } from '@/app/generated/prisma/client'
 import { PrismaLibSql } from '@prisma/adapter-libsql'
 
 function createPrisma() {
-    let dbUrl = `file:${process.cwd()}/data/dev.db`
-    console.log("DATABASE_URL:", process.env.DATABASE_URL)
+    let dbUrl = process.env.DATABASE_URL || `file:${process.cwd()}/data/dev.db`
     const adapter = new PrismaLibSql({ url: dbUrl })
     return new PrismaClient({ adapter })
 }
