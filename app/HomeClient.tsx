@@ -104,7 +104,7 @@ export default function HomeClient({ allTimePeople, competitivePeople }: Props) 
                         alignItems: 'center',
                         gap: '4px',
                     }}>
-                        Modo Competitivo
+                        Modo Premio
                     </span>
                 </div>
 
