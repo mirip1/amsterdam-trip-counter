@@ -1,7 +1,14 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
+
+const bgImages = [
+    '/images-juank/juank1.png',
+    '/images-juank/juank2.png',
+    '/images-juank/juank3.png',
+    '/images-juank/juank4.png'
+]
 
 type Person = {
     id: number
@@ -16,16 +23,44 @@ type Props = {
 
 export default function HomeClient({ allTimePeople, competitivePeople }: Props) {
     const [competitive, setCompetitive] = useState(false)
+    const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImageIndex((prev) => (prev + 1) % bgImages.length)
+        }, 4000)
+        return () => clearInterval(interval)
+    }, [])
 
     const people = competitive ? competitivePeople : allTimePeople
 
     return (
         <main className="app-container">
-            <header className="app-header">
-                <div className="header-icon">😈​</div>
-                <h1>Viaje a Amsterdam</h1>
-                <p className="header-sub">Seleccionate para apuntar el vicio</p>
-                <Link
+            <header className="app-header" style={{ position: 'relative', overflow: 'hidden' }}>
+                {bgImages.map((src, index) => (
+                    <div
+                        key={src}
+                        style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            backgroundImage: `url(${src})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            opacity: index === currentImageIndex ? 0.4 : 0,
+                            transition: 'opacity 1.5s ease-in-out',
+                            zIndex: 0,
+                        }}
+                    />
+                ))}
+                
+                <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <div className="header-icon">😈​</div>
+                    <h1 style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>Viaje a Amsterdam</h1>
+                    <p className="header-sub" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.8)' }}>Seleccionate para apuntar el vicio</p>
+                    <Link
                     href="/stats"
                     className="stats-link"
                     style={{
@@ -118,6 +153,7 @@ export default function HomeClient({ allTimePeople, competitivePeople }: Props) 
                         29 mar – 3 abr 2026
                     </p>
                 )}
+                </div>
             </header>
 
             <ul className="people-list">
