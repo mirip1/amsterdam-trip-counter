@@ -4,6 +4,27 @@ export async function getPeople() {
     return prisma.person.findMany({ orderBy: { id: "asc" } })
 }
 
+export async function getPeopleWithScoresCompetitive() {
+    const TRIP_START = new Date('2026-03-29T00:00:00.000Z')
+    const TRIP_END = new Date('2026-04-03T23:59:59.999Z')
+
+    const people = await prisma.person.findMany()
+    const items = await prisma.item.findMany()
+    const events = await prisma.event.findMany({
+        where: { createdAt: { gte: TRIP_START, lte: TRIP_END } }
+    })
+
+    const itemValues = Object.fromEntries(items.map(i => [i.id, i.value]))
+
+    const scores = people.map(person => {
+        const personEvents = events.filter(e => e.personId === person.id)
+        const score = personEvents.reduce((sum, e) => sum + (itemValues[e.itemId] || 0), 0)
+        return { ...person, score }
+    })
+
+    return scores.sort((a, b) => b.score - a.score)
+}
+
 export async function getPeopleWithScores() {
     const people = await prisma.person.findMany()
     const items = await prisma.item.findMany()
