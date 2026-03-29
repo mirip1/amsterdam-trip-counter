@@ -5,7 +5,7 @@ export async function getPeople() {
 }
 
 export async function getPeopleWithScoresCompetitive() {
-    const TRIP_START = new Date('2026-03-29T00:00:00.000Z')
+    const TRIP_START = new Date('2026-03-30T00:00:00.000Z')
     const TRIP_END = new Date('2026-04-03T23:59:59.999Z')
 
     const people = await prisma.person.findMany()
@@ -88,8 +88,8 @@ export async function getPersonWithCounts(id: number) {
 }
 
 export async function getPersonChartData(personId: number) {
-    // Generate dates from 29/03/2026 to 03/04/2026
-    const startDate = new Date('2026-03-29T00:00:00.000Z')
+    // Generate dates from 30/03/2026 to 03/04/2026
+    const startDate = new Date('2026-03-30T00:00:00.000Z')
     const endDate = new Date('2026-04-03T23:59:59.999Z')
     
     const dates: string[] = []

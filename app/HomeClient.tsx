@@ -156,7 +156,7 @@ export default function HomeClient({ allTimePeople, competitivePeople }: Props) 
                             marginTop: '6px',
                             opacity: 0.8,
                         }}>
-                            29 mar – 3 abr 2026
+                            30 mar – 3 abr 2026
                         </p>
                     )}
                 </div>
